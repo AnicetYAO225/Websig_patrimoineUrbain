@@ -1,0 +1,33 @@
+# Environnement
+.env
+.venv/
+venv/
+
+# Fichiers uploadés (avatars...)
+backend/media/
+
+# Python
+__pycache__/
+*.pyc
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Docker
+*.log
+
+# Éditeurs
+.vscode/
+.idea/
+
+# la clé de FIRMS
+FIRMS_MAP_KEY=7d02874cb4760bb7e9a48f1bd0154f56
+
+# les codes secrets
+.env
+backend/.env
+backend/secrets/
+**/secrets/

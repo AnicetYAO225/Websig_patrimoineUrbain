@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/*
+  Système de design — WebSIG Patrimoine
+  ======================================
+  Identité inspirée des documents cartographiques officiels (cadastre,
+  plans topographiques, cartouches de plan) plutôt que d'un style SaaS
+  générique. Trois rôles typographiques distincts (IBM Plex Serif / Sans
+  / Mono) et une palette ancrée dans le territoire : encre cartographique,
+  cuivre (héritage métallurgique de Saint-Étienne), vert topographique.
+*/
+@theme {
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Structure / encre cartographique */
+  --color-ink-900: #16232f;
+  --color-ink-800: #1f3040;
+  --color-ink-700: #2c3e4c;
+  --color-ink-500: #5b6b78;
+  --color-ink-300: #9aa7b0;
+
+  /* Fond parchemin (froid, pas la teinte crème générique) */
+  --color-paper-100: #f1efe9;
+  --color-paper-200: #e7e3d9;
+
+  /* Accent primaire : cuivre — clin d'œil à l'héritage métallurgique stéphanois */
+  --color-copper-600: #a6602e;
+  --color-copper-500: #bd7440;
+  --color-copper-100: #f3e3d4;
+
+  /* Accent secondaire : vert topographique (végétation / hydrographie) */
+  --color-pine-700: #2c473e;
+  --color-pine-500: #3f6355;
+  --color-pine-100: #dde8e2;
+
+  /* États (usage fonctionnel uniquement, jamais décoratif) */
+  --color-signal-600: #a8402f;
+  --color-signal-100: #f3ddd7;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans);
+  background-color: var(--color-paper-100);
+  color: var(--color-ink-900);
+}
+
+/* Codes, coordonnées, identifiants (INSEE, SIREN, lat/lon) : toujours en
+   monospace avec chiffres tabulaires, jamais en police courante. */
+.font-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+  "Cartouche" — élément signature du système de design : panneau à coins
+  arrondis, bordure fine et ombre légère. Une fine ligne cuivre en haut
+  (voir .cartouche-accent, utilisée sur les éléments qui en ont besoin)
+  garde le clin d'œil à l'identité cartographique sans nuire au rendu
+  épuré recherché.
+*/
+.cartouche {
+  position: relative;
+  background: white;
+  border: 1px solid var(--color-ink-300);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(22, 35, 47, 0.04), 0 8px 24px -4px rgba(22, 35, 47, 0.08);
+}
+
+/* Texture de fond très discrète évoquant un papier millimétré / plan topo,
+   réservée aux zones cartographiques (jamais sur du texte long). */
+.grid-paper {
+  background-image:
+    linear-gradient(var(--color-ink-300) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-ink-300) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center;
+  opacity: 0.06;
+}
+
+/* Révélation discrète du panneau de connexion au chargement. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise-in {
+  animation: rise-in 0.5s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise-in { animation: none; }
+}
